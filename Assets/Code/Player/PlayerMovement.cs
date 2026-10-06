@@ -21,9 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveInput;
 
     private bool _isGrounded;
-    private bool _canJump;
     private float _coyoteTimer;
-    private float _jumpBufferTimer;
+    private float _jumpBufferTime;
 
     void Awake()
     {
@@ -53,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = CheckGrounded();
 
         MovePlayer();
+        HandleJumping();
     }
 
     private bool CheckGrounded()
@@ -68,20 +68,43 @@ public class PlayerMovement : MonoBehaviour
         float currentVel = _rb.linearVelocityX;
         float targetVel = _moveInput.x * _moveSpeed;
 
-        // mas aceleracion al girar para mejor movimiento
-        float turnMult = Mathf.Sign(currentVel) * Mathf.Sign(targetVel) < 0 ? 2f : 1f;
+        // mas aceleracion al girar o frenar para mejor movimiento
+        bool isMoving = Mathf.Abs(currentVel) > 0.01f;
+        bool hasInput = Mathf.Abs(_moveInput.x) > 0.01f;
+        bool isTurning = hasInput && Mathf.Sign(_moveInput.x) != Mathf.Sign(currentVel);
 
-        float newVel = Mathf.MoveTowards(currentVel, targetVel, _acceleration * turnMult * Time.fixedDeltaTime);
+        float accelMult = isMoving && (!hasInput || isTurning) ? 2f : 1f;
+
+        float newVel = Mathf.MoveTowards(currentVel, targetVel, _acceleration * accelMult * Time.fixedDeltaTime);
 
         _rb.linearVelocityX = newVel;
     }
 
+    private void HandleJumping()
+    {
+        if (_isGrounded) _coyoteTimer = _coyoteTime;
+        else _coyoteTimer -= Time.fixedDeltaTime;
+
+        bool canJump = _coyoteTimer > 0;
+        bool wantsToJump = Time.time < _jumpBufferTime;
+
+        if (canJump && wantsToJump)
+        {
+            Jump();
+
+            _jumpBufferTime = 0f;
+            _coyoteTimer = 0;
+        }
+    }
+
+    private void Jump()
+    {
+        _rb.linearVelocityY = _jumpSpeed;
+    }
+
     private void JumpPressed(InputAction.CallbackContext context)
     {
-        if (_isGrounded)
-        {
-            _rb.linearVelocityY = _jumpSpeed;
-        }
+        _jumpBufferTime = Time.time + _jumpBuffer;
     }
 
 }
