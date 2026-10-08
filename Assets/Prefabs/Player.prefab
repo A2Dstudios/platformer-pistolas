@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _moveSpeed: 7
-  _acceleration: 30
+  _acceleration: 70
   _jumpSpeed: 20
   _coyoteTime: 0.1
   _jumpBuffer: 0.15

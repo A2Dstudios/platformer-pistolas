@@ -69,13 +69,10 @@ public class PlayerMovement : MonoBehaviour
         float targetVel = _moveInput.x * _moveSpeed;
 
         // mas aceleracion al girar o frenar para mejor movimiento
-        bool isMoving = Mathf.Abs(currentVel) > 0.01f;
-        bool hasInput = Mathf.Abs(_moveInput.x) > 0.01f;
-        bool isTurning = hasInput && Mathf.Sign(_moveInput.x) != Mathf.Sign(currentVel);
+        bool isTurning = _moveInput.x * currentVel < 0;
+        float turnMult = isTurning ? 2f : 1f;
 
-        float accelMult = isMoving && (!hasInput || isTurning) ? 2f : 1f;
-
-        float newVel = Mathf.MoveTowards(currentVel, targetVel, _acceleration * accelMult * Time.fixedDeltaTime);
+        float newVel = Mathf.MoveTowards(currentVel, targetVel, _acceleration * turnMult * Time.fixedDeltaTime);
 
         _rb.linearVelocityX = newVel;
     }
