@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Refs")]
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Transform _feetPos;
 
     private PlayerInputs _inputs;
     private Vector2 _moveInput;
@@ -57,10 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        Vector2 feetPos = (Vector2)transform.position + Vector2.down * transform.localScale.y * 0.5f;
-        Vector2 groundCheckSize = new Vector2(transform.localScale.x * 0.95f, 0.1f);
-
-        return Physics2D.OverlapBox(feetPos, groundCheckSize, 0f, _groundLayer);
+        return Physics2D.OverlapBox(_feetPos.position, new Vector2(1f, 0.1f), 0f, _groundLayer);
     }
 
     private void MovePlayer()
