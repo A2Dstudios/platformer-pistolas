@@ -228,9 +228,9 @@ GameObject:
   - component: {fileID: 77479936430901617}
   - component: {fileID: 4225858690357789453}
   - component: {fileID: 7590457619118595404}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -361,6 +361,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _shootingType: {fileID: 11400000, guid: 09448578c45fa594ba4194694ac42d12, type: 2}
+  _bombThrowSpeed: 13
+  _bombs:
+  - type: 0
+    prefab: {fileID: 1917959851799464815, guid: d345c342833a8e646aaf99e04842ecd6, type: 3}
   _gunTransform: {fileID: 6520494434860317703}
   _shootingPoint: {fileID: 3890988147509648095}
 --- !u!1 &7706822869634038069

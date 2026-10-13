@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private PlayerShootingType _shootingType;
+
+    [Header("Bombs")]
+    [SerializeField] private float _bombThrowSpeed;
+    [SerializeField] private List<BombEntry> _bombs = new();
 
     [Header("Refs")]
     [SerializeField] private Transform _gunTransform;
@@ -13,6 +17,10 @@ public class PlayerShooting : MonoBehaviour
     private float _lastShotTime;
     private Vector2 _shootingDir;
     private bool _hasInput;
+
+    private BombType _equippedBomb;
+    private bool _hasBomb;
+
 
     void Awake()
     {
@@ -34,6 +42,16 @@ public class PlayerShooting : MonoBehaviour
 
         RotateGun();
         HandleShooting();
+        HandleBomb();
+    }
+
+    private void HandleBomb()
+    {
+        if(_inputs.Player.Bomb.IsPressed() && _hasInput && _hasBomb)
+        {
+            ThrowBomb(_shootingDir);
+            _hasBomb = false;
+        }
     }
 
     private void HandleShooting()
@@ -56,6 +74,24 @@ public class PlayerShooting : MonoBehaviour
         _lastShotTime = Time.time;
     }
 
+    private void ThrowBomb(Vector2 dir)
+    {
+        GameObject prefab = GetBombPrefab(_equippedBomb);
+
+        if (prefab == null) return;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        PlayerGrenade bomb = Instantiate(prefab, _shootingPoint.position, Quaternion.Euler(0, 0, angle)).GetComponent<PlayerGrenade>();
+        bomb.Init(0f, _bombThrowSpeed);
+    }
+
+    private GameObject GetBombPrefab(BombType type) // pillar bomba asignada a ese tipo
+    {
+        BombEntry entry = _bombs.Find(b => b.type == type);
+        return entry?.prefab;
+    }
+
 
     private void RotateGun()
     {
@@ -67,5 +103,15 @@ public class PlayerShooting : MonoBehaviour
         // girar si apuntas a la izquierda
         int flipY = Mathf.Abs(angle) > 90f ? -1 : 1;
         _gunTransform.localScale = new Vector2(_gunTransform.localScale.x, Mathf.Abs(_gunTransform.localScale.y) * flipY);
+    }
+
+
+    public bool TryPickupBomb(BombType type)
+    {
+        if (_hasBomb) return false;
+
+        _hasBomb = true;
+        _equippedBomb = type;
+        return true;
     }
 }
