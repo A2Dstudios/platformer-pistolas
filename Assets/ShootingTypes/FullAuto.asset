@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShootingType
   bulletPrefab: {fileID: 4012280172935176414, guid: a6aa257177f310442aedc7ffa666e588, type: 3}
   damage: 1
-  speed: 25
-  fireRate: 0.2
+  speed: 40
+  fireRate: 0.01
   nBullets: 1
   bulletSpread: 0
