@@ -26,7 +26,7 @@ public class basicMob : MobBase
             return;
         }
 
-        float distance = Vector2.Distance(transform.position,_player.position);
+        float distance = Vector2.Distance(transform.position, _player.position);
 
         if (distance <= _stopDistance || distance > _detectionRange)
         {
@@ -44,5 +44,10 @@ public class basicMob : MobBase
     public override void Attack()
     {
         // se hace cuando haya vida del jugador jeje good
+    }
+
+    public void AssisgnPlayer(Transform transformPlayer)
+    {
+        _player = transformPlayer;
     }
 }
