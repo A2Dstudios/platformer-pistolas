@@ -3,16 +3,10 @@ using UnityEngine;
 
 public class basicMob : MobBase
 {
+    [Header("Movement")]
     [SerializeField] private Transform _player;
     [SerializeField] private float _detectionRange = 6f;
-    [SerializeField] private float _stopDistance = 1f;
-
-    private Rigidbody2D _rb;
-
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-    }
+    [SerializeField] private float _stopDistance = 1.5f;
 
     private void FixedUpdate()
     {
@@ -34,9 +28,7 @@ public class basicMob : MobBase
             return;
         }
 
-        float direction = Mathf.Sign(
-            _player.position.x - transform.position.x
-        );
+        float direction = Mathf.Sign( _player.position.x - transform.position.x);
 
         _rb.linearVelocityX = direction * _velocity;
     }

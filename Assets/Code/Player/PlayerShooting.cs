@@ -12,6 +12,7 @@ public class PlayerShooting : MonoBehaviour
     [Header("Refs")]
     [SerializeField] private Transform _gunTransform;
     [SerializeField] private Transform _shootingPoint;
+    [SerializeField] private Rigidbody2D _rb;
     private PlayerInputs _inputs;
 
     private float _lastShotTime;
@@ -24,6 +25,7 @@ public class PlayerShooting : MonoBehaviour
 
     void Awake()
     {
+        if (_rb == null) _rb = GetComponent<Rigidbody2D>();
         _inputs = new PlayerInputs();
     }
     private void OnEnable()
@@ -69,7 +71,7 @@ public class PlayerShooting : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         PlayerBullet bullet = Instantiate(_shootingType.bulletPrefab, _shootingPoint.position, Quaternion.Euler(0, 0, angle)).GetComponent<PlayerBullet>();
-        bullet.Init(_shootingType.damage, _shootingType.speed);
+        bullet.Init(_shootingType);
 
         _lastShotTime = Time.time;
     }
@@ -83,7 +85,9 @@ public class PlayerShooting : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         PlayerGrenade bomb = Instantiate(prefab, _shootingPoint.position, Quaternion.Euler(0, 0, angle)).GetComponent<PlayerGrenade>();
-        bomb.Init(0f, _bombThrowSpeed);
+
+        Rigidbody2D rb = bomb.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = _bombThrowSpeed * dir.normalized + _rb.linearVelocity*0.5f;
     }
 
     private GameObject GetBombPrefab(BombType type) // pillar bomba asignada a ese tipo

@@ -79,7 +79,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1171437187, guid: c631a9eba8c1f0a4fabf8a44f803794e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1496207640078489007}
   - component: {fileID: 2416990258346561701}
   - component: {fileID: -7286323150326903957}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}

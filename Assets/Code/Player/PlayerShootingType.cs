@@ -10,4 +10,12 @@ public class PlayerShootingType : ScriptableObject
 
     public int nBullets;
     public float bulletSpread;
+
+    public float lifetime;
+    public LayerMask obstacleLayers;
+
+    public PlayerShootingType(float speed)
+    {
+        this.speed = speed;
+    }
 }

@@ -184,6 +184,6 @@ MonoBehaviour:
   _velocity: 2
   _baseDamage: 1
   rb: {fileID: 0}
-  _player: {fileID: 7741268493817374993, guid: 90567331cef4abc48ab0d670def398e2, type: 3}
+  _player: {fileID: 0}
   _detectionRange: 6
   _stopDistance: 1

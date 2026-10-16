@@ -29,6 +29,6 @@ public class PlayerGrenade : PlayerBullet
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         PlayerBullet bullet = Instantiate(_projectile.bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle)).GetComponent<PlayerBullet>();
-        bullet.Init(_projectile.damage, _projectile.speed, 0.15f);
+        bullet.Init(_projectile);
     }
 }

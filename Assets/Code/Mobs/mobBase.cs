@@ -3,24 +3,24 @@ using UnityEngine;
 
 public abstract class MobBase : MonoBehaviour
 {
-
-    [SerializeField] private float _maxHP;
-    [SerializeField] private float _actualHP;
+    [Header("Base")]
+    [SerializeField] protected float _maxHP;
     [SerializeField] protected float _velocity;
     [SerializeField] protected float _baseDamage;
+    protected float _hP;
 
 
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] protected Rigidbody2D _rb;
 
     private bool _isDead = false;
 
-    protected void Start()
+    protected void Awake()
     {
-        _actualHP = _maxHP;
+        _hP = _maxHP;
 
-        if (rb == null)
+        if (_rb == null)
         {
-            rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody2D>();
         }
     }
 
@@ -31,11 +31,11 @@ public abstract class MobBase : MonoBehaviour
             return;
         }
 
-        _actualHP -= quantity;
+        _hP -= quantity;
 
-        if (_actualHP <= 0)
+        if (_hP <= 0)
         {
-            _actualHP = 0;
+            _hP = 0;
             Die();
         }
     }
