@@ -70,8 +70,13 @@ public class PlayerShooting : MonoBehaviour
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        PlayerBullet bullet = Instantiate(_shootingType.bulletPrefab, _shootingPoint.position, Quaternion.Euler(0, 0, angle)).GetComponent<PlayerBullet>();
-        bullet.Init(_shootingType);
+        for (int i = 0; i < _shootingType.nBullets; i++)
+        {
+            float newAngle = angle + Random.Range(-_shootingType.bulletSpread, _shootingType.bulletSpread);
+
+            PlayerBullet bullet = Instantiate(_shootingType.bulletPrefab, _shootingPoint.position, Quaternion.Euler(0, 0, newAngle)).GetComponent<PlayerBullet>();
+            bullet.Init(_shootingType);
+        }
 
         _lastShotTime = Time.time;
     }

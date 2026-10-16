@@ -8,9 +8,11 @@ public class PlayerShootingType : ScriptableObject
     public float speed;
     public float fireRate;
 
+    [Header("Multishot")]
     public int nBullets;
     public float bulletSpread;
 
+    [Header("Despawning")]
     public float lifetime;
     public LayerMask obstacleLayers;
 
