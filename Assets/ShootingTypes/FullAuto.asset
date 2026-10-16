@@ -18,3 +18,7 @@ MonoBehaviour:
   fireRate: 0.01
   nBullets: 1
   bulletSpread: 0
+  lifetime: 5
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 576

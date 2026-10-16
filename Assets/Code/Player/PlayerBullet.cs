@@ -4,23 +4,41 @@ public class PlayerBullet : MonoBehaviour
 {
     protected float _damage;
     protected float _speed;
+    protected LayerMask _obstacleLayers;
 
     [Header("Refs")]
     [SerializeField] private Rigidbody2D _rb;
 
-    public void Init(float damage, float speed, float lifetime = 10f)
+    public virtual void Init(PlayerShootingType data)
     {
-        _damage = damage;
-        _speed = speed;
+        _damage = data.damage;
+        _speed = data.speed;
+        _obstacleLayers = data.obstacleLayers;
 
         if (_rb == null) _rb = GetComponent<Rigidbody2D>();
         _rb.linearVelocity = _speed * transform.right;
 
-        Destroy(gameObject, lifetime); // super mega provisional tio
+        if (data.lifetime > 0) Invoke(nameof(Consume), data.lifetime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // matar asesinar destruir
+        if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            if (!other.TryGetComponent(out MobBase enemy)) return;
+            enemy.TakeDamage(_damage);
+        }
+        
+        if(((1 << other.gameObject.layer) & _obstacleLayers) != 0) //si la capa de other es una de las de obstaculo
+        {
+            Consume();
+        }
+    }
+
+    public virtual void Consume()
+    {
+
+
+        Destroy(gameObject);
     }
 }
