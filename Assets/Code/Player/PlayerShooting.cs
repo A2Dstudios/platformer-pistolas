@@ -29,7 +29,7 @@ public class PlayerShooting : MonoBehaviour
         if (_rb == null) _rb = GetComponent<Rigidbody2D>();
         _inputs = new PlayerInputs();
 
-        ChanseShootingType(_shootingType);
+        ChangeShootingType(_shootingType);
     }
     private void OnEnable()
     {
@@ -130,7 +130,7 @@ public class PlayerShooting : MonoBehaviour
         return true;
     }
 
-    public void ChanseShootingType(PlayerShootingType newType)
+    public void ChangeShootingType(PlayerShootingType newType)
     {
         _shootingType = newType;
         _gunSprite.sprite = newType.sprite;

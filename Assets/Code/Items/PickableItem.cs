@@ -3,8 +3,8 @@ using UnityEngine;
 public abstract class PickableItem : MonoBehaviour
 {
     [Header("Animation")]
-    [SerializeField] private float _animSpeed;
-    [SerializeField] private float _animHeight;
+    [SerializeField] private float _animSpeed = 2f;
+    [SerializeField] private float _animHeight= 0.3f;
     private float _startY;
 
     private void Awake()
