@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Refs")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Transform _feetPos;
+    [SerializeField] private Animator _animator;
 
     private PlayerInputs _inputs;
     private Vector2 _moveInput;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         _inputs = new PlayerInputs();
 
         if (_rb == null) _rb = GetComponent<Rigidbody2D>();
+        if (_animator == null) _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -46,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         _moveInput = _inputs.Player.Move.ReadValue<Vector2>();
+
+        HandleAnimations();
     }
 
     private void FixedUpdate()
@@ -102,4 +106,23 @@ public class PlayerMovement : MonoBehaviour
         _jumpBufferTime = Time.time + _jumpBuffer;
     }
 
+    private void HandleAnimations()
+    {
+        _animator.SetBool("grounded", _isGrounded);
+        _animator.SetBool("moving", Mathf.Abs(_moveInput.x) > 0);
+        _animator.SetFloat("walkSpeed", Mathf.Abs(_rb.linearVelocityX) / _moveSpeed);
+
+        // flipear el sprite hacia donde te estés moviendo o hacia donde estés disparando
+        float aiming= _inputs.Player.Shoot.ReadValue<Vector2>().x;
+        if(Mathf.Abs(aiming) > 0)
+        {
+            if (aiming > 0) transform.localScale = new Vector3(1f, 1f, 1f);
+            if (aiming < 0) transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else
+        {
+            if (_moveInput.x > 0) transform.localScale = new Vector3(1f, 1f, 1f);
+            if (_moveInput.x < 0) transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+    }
 }

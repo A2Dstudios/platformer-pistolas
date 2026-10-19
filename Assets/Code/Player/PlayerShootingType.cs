@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "A2D/Player Shooting Type")]
 public class PlayerShootingType : ScriptableObject
 {
+    public Sprite sprite;
     public GameObject bulletPrefab;
     public float damage;
     public float speed;
