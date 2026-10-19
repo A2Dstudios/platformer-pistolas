@@ -11,6 +11,7 @@ public class PlayerShooting : MonoBehaviour
 
     [Header("Refs")]
     [SerializeField] private Transform _gunTransform;
+    [SerializeField] private SpriteRenderer _gunSprite;
     [SerializeField] private Transform _shootingPoint;
     [SerializeField] private Rigidbody2D _rb;
     private PlayerInputs _inputs;
@@ -27,6 +28,8 @@ public class PlayerShooting : MonoBehaviour
     {
         if (_rb == null) _rb = GetComponent<Rigidbody2D>();
         _inputs = new PlayerInputs();
+
+        ChanseShootingType(_shootingType);
     }
     private void OnEnable()
     {
@@ -104,14 +107,17 @@ public class PlayerShooting : MonoBehaviour
 
     private void RotateGun()
     {
-        if(!_hasInput) return;
+        if (!_hasInput) return;
 
         float angle = Mathf.Atan2(_shootingDir.y, _shootingDir.x) * Mathf.Rad2Deg;
-        _gunTransform.eulerAngles = new Vector3(0f, 0f, angle);
 
-        // girar si apuntas a la izquierda
-        int flipY = Mathf.Abs(angle) > 90f ? -1 : 1;
-        _gunTransform.localScale = new Vector2(_gunTransform.localScale.x, Mathf.Abs(_gunTransform.localScale.y) * flipY);
+        // si el player mira hacia la izquierda corregir angulo
+        if (transform.localScale.x < 0)
+        {
+            angle += 180f;
+        }
+
+        _gunTransform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
 
@@ -122,5 +128,11 @@ public class PlayerShooting : MonoBehaviour
         _hasBomb = true;
         _equippedBomb = type;
         return true;
+    }
+
+    public void ChanseShootingType(PlayerShootingType newType)
+    {
+        _shootingType = newType;
+        _gunSprite.sprite = newType.sprite;
     }
 }

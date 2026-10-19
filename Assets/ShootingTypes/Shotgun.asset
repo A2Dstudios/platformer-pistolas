@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ef7b2d66d0d1d4bb35f4786008ffc6, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShootingType
+  sprite: {fileID: -696233862, guid: c631a9eba8c1f0a4fabf8a44f803794e, type: 3}
   bulletPrefab: {fileID: 4012280172935176414, guid: a6aa257177f310442aedc7ffa666e588, type: 3}
   damage: 0.5
   speed: 22
   fireRate: 0.6
   nBullets: 5
   bulletSpread: 10
-  lifetime: 0.3
+  lifetime: 0.25
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 576
