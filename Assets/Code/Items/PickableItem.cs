@@ -14,7 +14,7 @@ public abstract class PickableItem : MonoBehaviour
 
     private void Update() // animacion arriba y abajo
     {
-        float y = _startY + _animHeight * Mathf.Abs(Mathf.Sin(Time.time * _animSpeed));
+        float y = _startY + _animHeight * Mathf.Abs(Mathf.Sin(-Time.time * _animSpeed + transform.position.x/4));
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 

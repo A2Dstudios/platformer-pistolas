@@ -81,6 +81,12 @@ public class PlayerShooting : MonoBehaviour
             bullet.Init(_shootingType);
         }
 
+        // recoil
+        if(_shootingType.recoil > 0)
+        {
+            _rb.AddForce(-dir * _shootingType.recoil * new Vector2(1f, 0.5f), ForceMode2D.Impulse);
+        }
+
         _lastShotTime = Time.time;
     }
 
