@@ -17,6 +17,7 @@ MonoBehaviour:
   damage: 0.1
   speed: 40
   fireRate: 0.03
+  recoil: 2.5
   nBullets: 1
   bulletSpread: 7
   lifetime: 1

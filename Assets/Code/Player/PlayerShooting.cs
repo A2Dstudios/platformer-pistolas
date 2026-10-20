@@ -29,7 +29,7 @@ public class PlayerShooting : MonoBehaviour
         if (_rb == null) _rb = GetComponent<Rigidbody2D>();
         _inputs = new PlayerInputs();
 
-        ChanseShootingType(_shootingType);
+        ChangeShootingType(_shootingType);
     }
     private void OnEnable()
     {
@@ -81,6 +81,12 @@ public class PlayerShooting : MonoBehaviour
             bullet.Init(_shootingType);
         }
 
+        // recoil
+        if(_shootingType.recoil > 0)
+        {
+            _rb.AddForce(-dir * _shootingType.recoil * new Vector2(1f, 0.5f), ForceMode2D.Impulse);
+        }
+
         _lastShotTime = Time.time;
     }
 
@@ -130,7 +136,7 @@ public class PlayerShooting : MonoBehaviour
         return true;
     }
 
-    public void ChanseShootingType(PlayerShootingType newType)
+    public void ChangeShootingType(PlayerShootingType newType)
     {
         _shootingType = newType;
         _gunSprite.sprite = newType.sprite;

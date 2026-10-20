@@ -8,6 +8,7 @@ public class PlayerShootingType : ScriptableObject
     public float damage;
     public float speed;
     public float fireRate;
+    public float recoil;
 
     [Header("Multishot")]
     public int nBullets;

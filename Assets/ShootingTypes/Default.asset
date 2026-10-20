@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ef7b2d66d0d1d4bb35f4786008ffc6, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShootingType
-  sprite: {fileID: -1643883329, guid: c631a9eba8c1f0a4fabf8a44f803794e, type: 3}
+  sprite: {fileID: 887491344, guid: c631a9eba8c1f0a4fabf8a44f803794e, type: 3}
   bulletPrefab: {fileID: 4012280172935176414, guid: a6aa257177f310442aedc7ffa666e588, type: 3}
   damage: 1
   speed: 25
   fireRate: 0.2
+  recoil: 0
   nBullets: 1
   bulletSpread: 2
   lifetime: 5

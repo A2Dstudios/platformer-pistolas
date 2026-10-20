@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        return Physics2D.OverlapBox(_feetPos.position, new Vector2(0.8f, 0.1f), 0f, _groundLayer);
+        return Physics2D.OverlapBox(_feetPos.position, new Vector2(0.5f, 0.1f), 0f, _groundLayer);
     }
 
     private void MovePlayer()
