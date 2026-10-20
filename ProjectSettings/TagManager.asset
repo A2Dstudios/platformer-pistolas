@@ -39,6 +39,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 538905867
+    locked: 0
+  - name: DECO
+    uniqueID: 905327889
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
