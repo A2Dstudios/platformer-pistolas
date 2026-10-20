@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 325524564751692197, guid: d6e5d5f95de51b848949f1a8ff600668, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7491938
+      objectReference: {fileID: 0}
+    - target: {fileID: 325524564751692197, guid: d6e5d5f95de51b848949f1a8ff600668, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.18
+      objectReference: {fileID: 0}
     - target: {fileID: 3054758890949051652, guid: d6e5d5f95de51b848949f1a8ff600668, type: 3}
       propertyPath: m_Name
       value: Sniper
