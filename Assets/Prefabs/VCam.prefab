@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6781184062813093128}
   - component: {fileID: 1913462030185103916}
   - component: {fileID: 1922763881299415600}
+  - component: {fileID: 7057695857065385462}
   m_Layer: 0
   m_Name: VCam
   m_TagString: Untagged
@@ -93,12 +94,12 @@ MonoBehaviour:
   Composition:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
-      Enabled: 0
-      Size: {x: 0.2, y: 0.08}
+      Enabled: 1
+      Size: {x: 0, y: 0.25}
     HardLimits:
-      Enabled: 0
-      Size: {x: 0.45, y: 0.54}
-      Offset: {x: 0, y: -0.22}
+      Enabled: 1
+      Size: {x: 0.5, y: 0.4}
+      Offset: {x: 0, y: -0.5}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 2, z: 0}
   Damping: {x: 0.3, y: 1.5, z: 0.3}
@@ -107,3 +108,17 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &7057695857065385462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2171302679392648317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce21e68fe7ef2948badf1769c923028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraTarget
+  _offset: 2
+  _smoothTime: 0.2
