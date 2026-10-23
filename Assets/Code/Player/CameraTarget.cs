@@ -1,33 +1,31 @@
-using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class CameraTarget : MonoBehaviour
 {
     [SerializeField] private float _offset = 2f;
-    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _smoothTime = 0.2f;
 
-    private Transform _playerTransform;
+    private CinemachinePositionComposer _composer;
     private PlayerInputs _playerInputs;
     private Vector3 _lookDir;
+    private Vector3 _velocity;
 
     void Awake()
     {
+        _composer = GetComponent<CinemachinePositionComposer>();
         _playerInputs = new PlayerInputs();
         _playerInputs.Player.Enable();
-
-        _playerTransform = transform.parent;
-
-        // desacoplar para evitar problemas
-        transform.SetParent(null);
     }
 
     void Update()
     {
         Vector2 input = _playerInputs.Player.Shoot.ReadValue<Vector2>();
-        bool hasInput = input.sqrMagnitude > 0;
 
-        _lookDir = Vector3.MoveTowards(_lookDir, input, _speed * Time.deltaTime);
+        _lookDir = Vector3.SmoothDamp(_lookDir, input, ref _velocity, _smoothTime);
 
-        transform.position = _playerTransform.position + _lookDir * _offset;
+        var comp = _composer.Composition;
+        comp.ScreenPosition = new Vector2(-_lookDir.x, _lookDir.y) * _offset;
+        _composer.Composition = comp;
     }
 }
