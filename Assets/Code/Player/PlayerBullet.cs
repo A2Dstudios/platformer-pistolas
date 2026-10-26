@@ -21,19 +21,30 @@ public class PlayerBullet : MonoBehaviour
         if (data.lifetime > 0) Invoke(nameof(Consume), data.lifetime);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+   
+private void OnTriggerEnter2D(Collider2D other)
+{
+    ExplosiveBarrel barrel = other.GetComponentInParent<ExplosiveBarrel>();
+
+    if (barrel != null)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            if (!other.TryGetComponent(out MobBase enemy)) return;
-            enemy.TakeDamage(_damage);
-        }
-        
-        if(((1 << other.gameObject.layer) & _obstacleLayers) != 0) //si la capa de other es una de las de obstaculo
-        {
-            Consume();
-        }
+        barrel.Explode();
+        Consume();
+        return;
     }
+
+    if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+    {
+        if (!other.TryGetComponent(out MobBase enemy)) return;
+        enemy.TakeDamage(_damage);
+    }
+
+    if (((1 << other.gameObject.layer) & _obstacleLayers) != 0)
+    {
+        Consume();
+    }
+}
+
 
     public virtual void Consume()
     {
