@@ -32,9 +32,6 @@ public class PlayerBullet : MonoBehaviour
         
         if(((1 << other.gameObject.layer) & _obstacleLayers) != 0) //si la capa de other es una de las de obstaculo
         {
-            GameObject impact = Instantiate(_impactEffect, transform.position, transform.rotation);
-            Destroy(impact, 1f);
-
             Consume();
         }
     }
