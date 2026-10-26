@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraTarget
   _offset: 2
-  _smoothTime: 0.2
+  _smoothTime: 0.5

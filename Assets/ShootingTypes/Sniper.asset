@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sniper
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShootingType
   sprite: {fileID: -1471041453, guid: c631a9eba8c1f0a4fabf8a44f803794e, type: 3}
-  bulletPrefab: {fileID: 4012280172935176414, guid: a6aa257177f310442aedc7ffa666e588, type: 3}
+  bulletPrefab: {fileID: 6092767849234597742, guid: 0d37fa60b4ec21d4b8b1fc71bf083329, type: 3}
   damage: 8
   speed: 40
   fireRate: 0.5

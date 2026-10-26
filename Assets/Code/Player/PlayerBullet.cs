@@ -8,6 +8,7 @@ public class PlayerBullet : MonoBehaviour
 
     [Header("Refs")]
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private GameObject _impactEffect;
 
     public virtual void Init(PlayerShootingType data)
     {
@@ -31,13 +32,15 @@ public class PlayerBullet : MonoBehaviour
         
         if(((1 << other.gameObject.layer) & _obstacleLayers) != 0) //si la capa de other es una de las de obstaculo
         {
+            GameObject impact = Instantiate(_impactEffect, transform.position, transform.rotation);
+            Destroy(impact, 1f);
+
             Consume();
         }
     }
 
     public virtual void Consume()
     {
-
 
         Destroy(gameObject);
     }

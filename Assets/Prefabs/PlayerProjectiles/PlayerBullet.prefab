@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6964903296961882530}
   - component: {fileID: 6686152988125895259}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3251011033965322991}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000026481985, y: 0.0000002648131, z: 0.70710576, w: -0.70710784}
-  m_LocalPosition: {x: -0.011, y: -0, z: -0}
-  m_LocalScale: {x: 0.164385, y: 0.39072, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 36364245009016483}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6686152988125895259
 SpriteRenderer:
   serializedVersion: 2
@@ -81,9 +81,9 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -1578582274, guid: 99a2e105b353f484e8228cbd2070eae8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 36364245009016483}
   - component: {fileID: 6232917454911565159}
   - component: {fileID: 6293074842043721421}
-  - component: {fileID: 2344693429319363043}
+  - component: {fileID: 611422358985257191}
   m_Layer: 7
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -119,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 4012280172935176414}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.77796, y: -0.14235, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBullet
   _rb: {fileID: 6293074842043721421}
+  _impactEffect: {fileID: 971169142273548600, guid: 0f7466a7b401ba4419166f6dca17de0e, type: 3}
 --- !u!50 &6293074842043721421
 Rigidbody2D:
   serializedVersion: 5
@@ -166,8 +167,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &2344693429319363043
-CircleCollider2D:
+--- !u!70 &611422358985257191
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -200,5 +201,6 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.04746902, y: 0}
-  m_Radius: 0.07191837
+  m_Offset: {x: -0.0108561525, y: 0.0000000012941541}
+  m_Size: {x: 0.34436014, y: 0.19545849}
+  m_Direction: 1
