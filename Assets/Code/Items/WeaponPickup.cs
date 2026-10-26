@@ -9,7 +9,7 @@ public class WeaponPickup : PickableItem
     {
         if (!other.TryGetComponent(out PlayerShooting player)) return;
 
-        player.ChangeShootingType(_weapon);
+        player.ChanseShootingType(_weapon);
 
         Destroy(gameObject);
     }

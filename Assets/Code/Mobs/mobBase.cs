@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public abstract class MobBase : MonoBehaviour
@@ -7,7 +8,10 @@ public abstract class MobBase : MonoBehaviour
     [SerializeField] protected float _maxHP;
     [SerializeField] protected float _velocity;
     [SerializeField] protected float _baseDamage;
+    [SerializeField] protected int _points;
     protected float _hP;
+
+    public event Action<int> SendToScore;
 
 
     [SerializeField] protected Rigidbody2D _rb;
@@ -52,6 +56,7 @@ public abstract class MobBase : MonoBehaviour
         }
 
         _isDead = true;
+        SendToScore?.Invoke(_points);
         Destroy(gameObject);
     }
 }

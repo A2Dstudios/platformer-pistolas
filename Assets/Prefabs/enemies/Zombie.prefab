@@ -180,10 +180,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::basicMob
   _maxHP: 10
-  _actualHP: 10
   _velocity: 2
   _baseDamage: 1
-  rb: {fileID: 0}
+  _points: 2
+  _rb: {fileID: 0}
   _player: {fileID: 0}
   _detectionRange: 6
   _stopDistance: 1
