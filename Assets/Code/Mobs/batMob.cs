@@ -1,10 +1,11 @@
+
 using UnityEngine;
 
 public class batMob : MobBase
 {
+    [Header("Bat Movement")]
     [SerializeField] private float _detectionRange = 6f;
-    [SerializeField] private float _stopDistance = 1.5f;
-
+    [SerializeField] private float _stopDistance = 1.2f;
     [SerializeField] private float _patrolDistance = 3f;
 
     private Vector2 _startPosition;
@@ -13,12 +14,14 @@ public class batMob : MobBase
     protected override void Awake()
     {
         base.Awake();
+
         _startPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
         Move();
+        Attack();
     }
 
     public override void Move()
@@ -34,7 +37,10 @@ public class batMob : MobBase
             return;
         }
 
-        float distance = Vector2.Distance(transform.position, _player.position);
+        float distance = Vector2.Distance(
+            transform.position,
+            _player.position
+        );
 
         if (distance <= _detectionRange)
         {
@@ -48,8 +54,11 @@ public class batMob : MobBase
 
     private void Patrol()
     {
-        float leftLimit = _startPosition.x - _patrolDistance;
-        float rightLimit = _startPosition.x + _patrolDistance;
+        float leftLimit =
+            _startPosition.x - _patrolDistance;
+
+        float rightLimit =
+            _startPosition.x + _patrolDistance;
 
         if (transform.position.x >= rightLimit)
         {
@@ -60,7 +69,10 @@ public class batMob : MobBase
             _patrolDirection = 1;
         }
 
-        _rb.linearVelocity = new Vector2(_patrolDirection * _velocity, 0f);
+        _rb.linearVelocity = new Vector2(
+            _patrolDirection * _velocity,
+            0f
+        );
     }
 
     private void ChasePlayer(float distance)
@@ -71,13 +83,17 @@ public class batMob : MobBase
             return;
         }
 
-        Vector2 direction = ((Vector2)_player.position - (Vector2)transform.position).normalized;
+        Vector2 direction =
+            (Vector2)_player.position -
+            (Vector2)transform.position;
+
+        direction.Normalize();
 
         _rb.linearVelocity = direction * _velocity;
     }
 
     public override void Attack()
     {
-        // Pendiente
+        AttackOnContact();
     }
 }

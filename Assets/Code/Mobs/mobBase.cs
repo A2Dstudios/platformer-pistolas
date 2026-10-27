@@ -1,40 +1,46 @@
+
 using System;
 using UnityEngine;
 
 public abstract class MobBase : MonoBehaviour
 {
     [Header("Base")]
-    [SerializeField] protected float _maxHP;
-    [SerializeField] protected float _velocity;
-    [SerializeField] protected float _baseDamage;
-    [SerializeField] protected int _points;
-    protected float _hP;
+    [SerializeField] protected float _maxHP = 3f;
+    [SerializeField] protected float _velocity = 2f;
+    [SerializeField] protected float _baseDamage = 1f;
+    [SerializeField] protected int _points = 10;
 
-    [SerializeField] protected Transform _player;
+    [Header("Contact Attack")]
+    [SerializeField] protected float _attackRange = 1.2f;
+    [SerializeField] protected float _attackCooldown = 1f;
+
+    protected float _hP;
+    protected Rigidbody2D _rb;
+    protected Transform _player;
+
+    private float _nextContactAttackTime;
+    private bool _isDead;
 
     public event Action<int> SendToScore;
-
-    [SerializeField] protected Rigidbody2D _rb;
-
-    private bool _isDead = false;
 
     protected virtual void Awake()
     {
         _hP = _maxHP;
+        _rb = GetComponent<Rigidbody2D>();
 
-        if (_rb == null)
+        GameObject playerObject =
+            GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject != null)
         {
-            _rb = GetComponent<Rigidbody2D>();
+            SetPlayer(playerObject.transform);
         }
-
-        // Si nadie le ha asignado el jugador, lo busca por su tag
-        if (_player == null)
+        else
         {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-            if (playerObject != null)
-            {
-                _player = playerObject.transform;
-            }
+            Debug.LogWarning(
+                "No se encuentra ningún objeto con la tag Player.",
+                this
+            );
         }
     }
 
@@ -45,18 +51,70 @@ public abstract class MobBase : MonoBehaviour
 
     public void TakeDamage(float quantity)
     {
-        if (_isDead || quantity <= 0)
+        if (_isDead || quantity <= 0f)
         {
             return;
         }
 
         _hP -= quantity;
 
-        if (_hP <= 0)
+        if (_hP <= 0f)
         {
-            _hP = 0;
             Die();
         }
+    }
+
+    protected bool AttackOnContact()
+    {
+        if (_isDead || _player == null)
+        {
+            return false;
+        }
+
+        if (Time.time < _nextContactAttackTime)
+        {
+            return false;
+        }
+
+        float distance = Vector2.Distance(
+            transform.position,
+            _player.position
+        );
+
+        if (distance > _attackRange)
+        {
+            return false;
+        }
+
+        PlayerHealth playerHealth =
+            _player.GetComponent<PlayerHealth>();
+
+        if (playerHealth == null)
+        {
+            playerHealth =
+                _player.GetComponentInParent<PlayerHealth>();
+        }
+
+        if (playerHealth == null)
+        {
+            Debug.LogWarning(
+                "No se encuentra PlayerHealth en el jugador.",
+                _player
+            );
+
+            return false;
+        }
+
+        _nextContactAttackTime =
+            Time.time + _attackCooldown;
+
+        Debug.Log(
+            name + " ataca por contacto. Daño: " + _baseDamage
+        );
+
+        playerHealth.TakeDamage(_baseDamage);
+
+        return true;
     }
 
     public abstract void Move();
@@ -71,7 +129,9 @@ public abstract class MobBase : MonoBehaviour
         }
 
         _isDead = true;
+
         SendToScore?.Invoke(_points);
+
         Destroy(gameObject);
     }
 }

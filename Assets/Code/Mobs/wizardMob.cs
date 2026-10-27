@@ -1,10 +1,11 @@
+
 using UnityEngine;
 
 public class wizardMob : MobBase
 {
+    [Header("Wizard")]
     [SerializeField] private float _detectionRange = 8f;
     [SerializeField] private float _keepDistance = 5f;
-    [SerializeField] private float _attackCooldown = 2f;
     [SerializeField] private float _projectileSpeed = 6f;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _firePoint;
@@ -19,10 +20,19 @@ public class wizardMob : MobBase
 
     public override void Move()
     {
-        if (_player == null) return;
+        if (_player == null || _rb == null)
+        {
+            return;
+        }
 
-        float distance = Vector2.Distance(transform.position, _player.position);
-        float direction = Mathf.Sign(_player.position.x - transform.position.x);
+        float distance = Vector2.Distance(
+            transform.position,
+            _player.position
+        );
+
+        float direction = Mathf.Sign(
+            _player.position.x - transform.position.x
+        );
 
         if (distance > _detectionRange)
         {
@@ -30,11 +40,11 @@ public class wizardMob : MobBase
         }
         else if (distance < _keepDistance - 0.5f)
         {
-            _rb.linearVelocityX = -direction * _velocity; // se aleja
+            _rb.linearVelocityX = -direction * _velocity;
         }
         else if (distance > _keepDistance + 0.5f)
         {
-            _rb.linearVelocityX = direction * _velocity;  // se acerca
+            _rb.linearVelocityX = direction * _velocity;
         }
         else
         {
@@ -44,13 +54,59 @@ public class wizardMob : MobBase
 
     public override void Attack()
     {
-        if (_player == null || Time.time < _nextAttackTime) return;
-        if (Vector2.Distance(transform.position, _player.position) > _detectionRange) return;
+        if (_player == null ||
+            _projectilePrefab == null ||
+            _firePoint == null)
+        {
+            return;
+        }
+
+        if (Time.time < _nextAttackTime)
+        {
+            return;
+        }
+
+        float distance = Vector2.Distance(
+            transform.position,
+            _player.position
+        );
+
+        if (distance > _detectionRange)
+        {
+            return;
+        }
 
         _nextAttackTime = Time.time + _attackCooldown;
 
-        Vector2 direction = _player.position - _firePoint.position;
-        GameObject projectile = Instantiate(_projectilePrefab, _firePoint.position, Quaternion.identity);
-        projectile.GetComponent<EnemyProjectile>().Init(direction, _baseDamage, _projectileSpeed);
+        Vector2 direction =
+            (Vector2)_player.position -
+            (Vector2)_firePoint.position;
+
+        GameObject projectile = Instantiate(
+            _projectilePrefab,
+            _firePoint.position,
+            Quaternion.identity
+        );
+
+        EnemyProjectile enemyProjectile =
+            projectile.GetComponent<EnemyProjectile>();
+
+        if (enemyProjectile != null)
+        {
+            enemyProjectile.Init(
+                direction,
+                _baseDamage,
+                _projectileSpeed
+            );
+        }
+        else
+        {
+            Debug.LogError(
+                "El prefab necesita el script EnemyProjectile.",
+                projectile
+            );
+
+            Destroy(projectile);
+        }
     }
 }
