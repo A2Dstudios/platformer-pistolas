@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,12 +30,18 @@ public class PlayerShooting : MonoBehaviour
         if (_rb == null) _rb = GetComponent<Rigidbody2D>();
         _inputs = new PlayerInputs();
 
-        ChangeShootingType(_shootingType);
+        ChanseShootingType(_shootingType);
     }
     private void OnEnable()
     {
         _inputs.Player.Enable();
     }
+
+    private void Start()
+    {
+        OnNewWeapon?.Invoke(_gunSprite.sprite);
+    }
+
     private void OnDisable()
     {
         _inputs.Player.Disable();
@@ -75,7 +82,7 @@ public class PlayerShooting : MonoBehaviour
 
         for (int i = 0; i < _shootingType.nBullets; i++)
         {
-            float newAngle = angle + Random.Range(-_shootingType.bulletSpread, _shootingType.bulletSpread);
+            float newAngle = angle + UnityEngine.Random.Range(-_shootingType.bulletSpread, _shootingType.bulletSpread);
 
             PlayerBullet bullet = Instantiate(_shootingType.bulletPrefab, _shootingPoint.position, Quaternion.Euler(0, 0, newAngle)).GetComponent<PlayerBullet>();
             bullet.Init(_shootingType);
@@ -136,9 +143,12 @@ public class PlayerShooting : MonoBehaviour
         return true;
     }
 
-    public void ChangeShootingType(PlayerShootingType newType)
+    public event Action<Sprite> OnNewWeapon;
+
+    public void ChanseShootingType(PlayerShootingType newType)
     {
         _shootingType = newType;
         _gunSprite.sprite = newType.sprite;
+        OnNewWeapon?.Invoke(newType.sprite);
     }
 }
