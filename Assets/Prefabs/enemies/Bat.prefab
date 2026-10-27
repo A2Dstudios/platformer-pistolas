@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7facc5244b8e8bb44a453df4bf4c5c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::batMob
-  _maxHP: 10
+  _maxHP: 5
   _velocity: 4
   _baseDamage: 1
   _points: 0

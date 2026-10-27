@@ -5023,8 +5023,8 @@ MonoBehaviour:
   _points: 2
   _hitEffect: {fileID: 7264984306685286353}
   _deathEffect: {fileID: 2615369458876785881, guid: 83322ff72196ecd49a4558e7e985d7c1, type: 3}
-  _player: {fileID: 0}
-  _rb: {fileID: 8421183507501390013}
+  _attackRange: 1.2
+  _attackCooldown: 1
   _minTpTime: 1
   _maxTpTime: 5
   _minTpDistance: 5
@@ -5032,6 +5032,9 @@ MonoBehaviour:
   _minAttackCooldown: 0.8
   _maxAttackCooldown: 2.4
   _projectileSpeed: 6
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 2112
   _projectilePrefab: {fileID: 6433527368585582329, guid: 5b35d5de47d0f0f40b38a4c8a777f89a, type: 3}
   _firePoint: {fileID: 7037973558088247736}
   _animator: {fileID: 620085810710299645}

@@ -14,6 +14,7 @@ public class wizardMob : MobBase
     private Vector3 _tpPos;
 
     [Header("Refs")]
+    [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private Animator _animator;
@@ -77,6 +78,8 @@ public class wizardMob : MobBase
 
             if (!hitGround) validSpot = true;
         }
+
+        tpSpot = (Vector3)Physics2D.Raycast(tpSpot, Vector2.down, _maxTpDistance, _groundLayer).point + Vector3.up;;
 
         _tpPos = tpSpot;
         _animator.SetTrigger("move");
