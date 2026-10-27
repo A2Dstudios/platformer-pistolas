@@ -1,4 +1,4 @@
-
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,41 +6,32 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float _maxHP = 5f;
 
+    public event Action<float, float> OnHealthChanged;
+
     private float _hP;
     private PlayerShield _shield;
 
     private void Awake()
     {
         _hP = _maxHP;
-        _shield = GetComponent<PlayerShield>();
+        _shield = GetComponentInChildren<PlayerShield>();
+    }
+
+    private void Start()
+    {
+        OnHealthChanged?.Invoke(_hP, _maxHP);
     }
 
     public void TakeDamage(float quantity)
     {
-        if (quantity <= 0f)
-        {
-            return;
-        }
-
-        if (_shield != null && _shield.HasShield())
-        {
-            return;
-        }
+        if (_shield != null && _shield.HasShield()) return;
 
         _hP -= quantity;
+        OnHealthChanged?.Invoke(_hP, _maxHP);
 
-        Debug.Log($"Vida del jugador: {_hP}/{_maxHP}");
-
-        if (_hP <= 0f)
+        if (_hP <= 0)
         {
-            Die();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-    }
-
-    private void Die()
-    {
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
-        );
     }
 }
