@@ -30,7 +30,7 @@ public class zombieMob : MobBase
         _rb.linearVelocityX = direction * _velocity;
     }
 
-    public override void Attack()
+    protected override void Attack()
     {
         // Pendiente
     }

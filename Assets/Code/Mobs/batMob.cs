@@ -76,7 +76,7 @@ public class batMob : MobBase
         _rb.linearVelocity = direction * _velocity;
     }
 
-    public override void Attack()
+    protected override void Attack()
     {
         // Pendiente
     }

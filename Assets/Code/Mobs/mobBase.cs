@@ -8,6 +8,8 @@ public abstract class MobBase : MonoBehaviour
     [SerializeField] protected float _velocity;
     [SerializeField] protected float _baseDamage;
     [SerializeField] protected int _points;
+    [SerializeField] protected ParticleSystem _hitEffect;
+    [SerializeField] protected GameObject _deathEffect;
     protected float _hP;
 
     [SerializeField] protected Transform _player;
@@ -51,6 +53,7 @@ public abstract class MobBase : MonoBehaviour
         }
 
         _hP -= quantity;
+        _hitEffect.Play();
 
         if (_hP <= 0)
         {
@@ -61,7 +64,7 @@ public abstract class MobBase : MonoBehaviour
 
     public abstract void Move();
 
-    public abstract void Attack();
+    protected abstract void Attack();
 
     private void Die()
     {
@@ -69,6 +72,9 @@ public abstract class MobBase : MonoBehaviour
         {
             return;
         }
+
+        GameObject effect = Instantiate(_deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 1.5f);
 
         _isDead = true;
         SendToScore?.Invoke(_points);

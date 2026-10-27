@@ -6,12 +6,10 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] private LayerMask _obstacleLayers;
     [SerializeField] private float _lifetime = 4f;
 
-    private float _damage;
+    [SerializeField] private float _damage;
 
-    public void Init(Vector2 direction, float damage, float speed)
+    public void Init(Vector2 direction, float speed)
     {
-        _damage = damage;
-
         if (_rb == null) _rb = GetComponent<Rigidbody2D>();
 
         direction.Normalize();
@@ -23,7 +21,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
+        PlayerHealth player = other.GetComponent<PlayerHealth>();
 
         if (player != null)
         {

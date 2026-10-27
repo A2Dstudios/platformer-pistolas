@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 899491787595907647}
   - component: {fileID: 4900904834421075804}
   - component: {fileID: 4907645211088621335}
-  - component: {fileID: 781880191819601580}
   - component: {fileID: 5619384348083995605}
+  - component: {fileID: 4129596425728578782}
+  - component: {fileID: 638418920399641953}
   m_Layer: 12
-  m_Name: enemyprojectile
+  m_Name: Wizard Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 426521079, guid: f7881e2e1efd5ae43b50c5761e7863c7, type: 3}
+  m_Sprite: {fileID: -1762442400, guid: 4be9d573bd74b014fbde6dea2ffb7960, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,8 +122,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &781880191819601580
-BoxCollider2D:
+--- !u!114 &5619384348083995605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433527368585582329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e1aa9ed019e4e41a0bf18ee1ddd2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectile
+  _rb: {fileID: 4907645211088621335}
+  _obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 72
+  _lifetime: 4
+  _damage: 0
+--- !u!58 &4129596425728578782
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -156,31 +175,26 @@ BoxCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.375, y: 0.1875}
-    newSize: {x: 0.375, y: 0.1875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.375, y: 0.1875}
-  m_EdgeRadius: 0
---- !u!114 &5619384348083995605
-MonoBehaviour:
+  m_Radius: 0.28463715
+--- !u!95 &638418920399641953
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6433527368585582329}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e1aa9ed019e4e41a0bf18ee1ddd2f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectile
-  _rb: {fileID: 4907645211088621335}
-  _obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 2112
-  _lifetime: 4
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32b7ede4eb6613b49a41d3246000efec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
