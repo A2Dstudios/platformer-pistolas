@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float quantity)
     {
+        Debug.Log("Daño recibido: " + quantity + " | vida antes: " + _hP);
         if (_shield != null && _shield.HasShield()) return;
 
         _hP -= quantity;

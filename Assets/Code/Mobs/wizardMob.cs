@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class wizardMob : MobBase
@@ -47,7 +48,10 @@ public class wizardMob : MobBase
 
     public override void Move()
     {
-        if (_player == null) return;
+        if (_player == null || _rb == null)
+        {
+            return;
+        }
 
         Vector3 tpSpot = Vector3.zero;
         bool validSpot = false;

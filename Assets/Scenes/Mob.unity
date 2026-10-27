@@ -1101,6 +1101,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6770084599704220104, guid: 90567331cef4abc48ab0d670def398e2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1813810479}
+    - targetCorrespondingSourceObject: {fileID: 6770084599704220104, guid: 90567331cef4abc48ab0d670def398e2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1813810485}
   m_SourcePrefab: {fileID: 100100000, guid: 90567331cef4abc48ab0d670def398e2, type: 3}
 --- !u!4 &1813810473 stripped
 Transform:
@@ -1120,6 +1123,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShield
   _duration: 5
+--- !u!114 &1813810485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295658597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a02751d51ce5a4ea873746ea5e4f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  _maxHP: 5
 --- !u!1001 &1942910639
 PrefabInstance:
   m_ObjectHideFlags: 0

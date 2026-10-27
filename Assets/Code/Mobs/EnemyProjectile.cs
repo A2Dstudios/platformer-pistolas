@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
@@ -15,6 +16,8 @@ public class EnemyProjectile : MonoBehaviour
         direction.Normalize();
         transform.right = direction;
         _rb.linearVelocity = direction * speed;
+
+        _initialized = true;
 
         Destroy(gameObject, _lifetime);
     }
