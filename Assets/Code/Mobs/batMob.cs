@@ -1,9 +1,7 @@
-
 using UnityEngine;
 
 public class batMob : MobBase
 {
-    [SerializeField] private Transform _player;
     [SerializeField] private float _detectionRange = 6f;
     [SerializeField] private float _stopDistance = 1.5f;
 
@@ -12,7 +10,7 @@ public class batMob : MobBase
     private Vector2 _startPosition;
     private int _patrolDirection = 1;
 
-    protected new void Awake()
+    protected override void Awake()
     {
         base.Awake();
         _startPosition = transform.position;
@@ -36,10 +34,7 @@ public class batMob : MobBase
             return;
         }
 
-        float distance = Vector2.Distance(
-            transform.position,
-            _player.position
-        );
+        float distance = Vector2.Distance(transform.position, _player.position);
 
         if (distance <= _detectionRange)
         {
@@ -65,10 +60,7 @@ public class batMob : MobBase
             _patrolDirection = 1;
         }
 
-        _rb.linearVelocity = new Vector2(
-            _patrolDirection * _velocity,
-            0f
-        );
+        _rb.linearVelocity = new Vector2(_patrolDirection * _velocity, 0f);
     }
 
     private void ChasePlayer(float distance)
@@ -79,19 +71,13 @@ public class batMob : MobBase
             return;
         }
 
-        Vector2 direction =
-            ((Vector2)_player.position - (Vector2)transform.position).normalized;
+        Vector2 direction = ((Vector2)_player.position - (Vector2)transform.position).normalized;
 
         _rb.linearVelocity = direction * _velocity;
     }
 
     public override void Attack()
     {
-        // Implementaremos el ataque más adelante.
-    }
-
-    public void AssignPlayer(Transform transformPlayer)
-    {
-        _player = transformPlayer;
+        // Pendiente
     }
 }

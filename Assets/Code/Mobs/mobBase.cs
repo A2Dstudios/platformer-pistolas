@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 
@@ -11,14 +10,15 @@ public abstract class MobBase : MonoBehaviour
     [SerializeField] protected int _points;
     protected float _hP;
 
-    public event Action<int> SendToScore;
+    [SerializeField] protected Transform _player;
 
+    public event Action<int> SendToScore;
 
     [SerializeField] protected Rigidbody2D _rb;
 
     private bool _isDead = false;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _hP = _maxHP;
 
@@ -26,6 +26,21 @@ public abstract class MobBase : MonoBehaviour
         {
             _rb = GetComponent<Rigidbody2D>();
         }
+
+        // Si nadie le ha asignado el jugador, lo busca por su tag
+        if (_player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                _player = playerObject.transform;
+            }
+        }
+    }
+
+    public void SetPlayer(Transform player)
+    {
+        _player = player;
     }
 
     public void TakeDamage(float quantity)

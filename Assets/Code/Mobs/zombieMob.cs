@@ -1,10 +1,7 @@
-
 using UnityEngine;
 
-public class basicMob : MobBase
+public class zombieMob : MobBase
 {
-    [Header("Movement")]
-    [SerializeField] private Transform _player;
     [SerializeField] private float _detectionRange = 6f;
     [SerializeField] private float _stopDistance = 1.5f;
 
@@ -28,18 +25,13 @@ public class basicMob : MobBase
             return;
         }
 
-        float direction = Mathf.Sign( _player.position.x - transform.position.x);
+        float direction = Mathf.Sign(_player.position.x - transform.position.x);
 
         _rb.linearVelocityX = direction * _velocity;
     }
 
     public override void Attack()
     {
-        // se hace cuando haya vida del jugador jeje good
-    }
-
-    public void AssisgnPlayer(Transform transformPlayer)
-    {
-        _player = transformPlayer;
+        // Pendiente
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3210444702896333487}
   - component: {fileID: 3429902483666509517}
   - component: {fileID: 3688594059175421651}
-  - component: {fileID: 2128012048905504933}
+  - component: {fileID: 715291616617065341}
   m_Layer: 9
   m_Name: Zombie
   m_TagString: Enemy
@@ -167,7 +167,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2128012048905504933
+--- !u!114 &715291616617065341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,14 +176,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6281235764535132332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f22ff181a274b418b71198ee3c0ed3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f4d2d6ca47020e46812f5ac69cb4e7c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::basicMob
+  m_EditorClassIdentifier: Assembly-CSharp::zombieMob
   _maxHP: 10
-  _velocity: 2
+  _velocity: 1
   _baseDamage: 1
-  _points: 2
   _rb: {fileID: 0}
   _player: {fileID: 0}
   _detectionRange: 6
-  _stopDistance: 1
+  _stopDistance: 1.5
+  _attackCooldown: 1
