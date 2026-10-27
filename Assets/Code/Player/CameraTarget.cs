@@ -28,4 +28,9 @@ public class CameraTarget : MonoBehaviour
         comp.ScreenPosition = new Vector2(-_lookDir.x, _lookDir.y) * _offset;
         _composer.Composition = comp;
     }
+
+    private void OnDestroy()
+    {
+        _playerInputs.Player.Disable();
+    }
 }
