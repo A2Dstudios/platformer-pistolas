@@ -17,7 +17,6 @@ public abstract class MobBase : MonoBehaviour
     [SerializeField] protected float _attackRange = 1.2f;
     [SerializeField] protected float _attackCooldown = 1f;
 
-    protected float _hP;
     protected Rigidbody2D _rb;
     protected Transform _player;
 
@@ -90,13 +89,11 @@ public abstract class MobBase : MonoBehaviour
             return false;
         }
 
-        PlayerHealth playerHealth =
-            _player.GetComponent<PlayerHealth>();
+        PlayerHealth playerHealth = _player.GetComponent<PlayerHealth>();
 
         if (playerHealth == null)
         {
-            playerHealth =
-                _player.GetComponentInParent<PlayerHealth>();
+            playerHealth = _player.GetComponentInParent<PlayerHealth>();
         }
 
         if (playerHealth == null)
@@ -109,12 +106,9 @@ public abstract class MobBase : MonoBehaviour
             return false;
         }
 
-        _nextContactAttackTime =
-            Time.time + _attackCooldown;
+        _nextContactAttackTime = Time.time + _attackCooldown;
 
-        Debug.Log(
-            name + " ataca por contacto. Daño: " + _baseDamage
-        );
+        Debug.Log(name + " ataca por contacto. Daño: " + _baseDamage);
 
         playerHealth.TakeDamage(_baseDamage);
 

@@ -139,7 +139,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   _lifetime: 4
-  _damage: 0
+  _damage: 1
 --- !u!58 &4129596425728578782
 CircleCollider2D:
   m_ObjectHideFlags: 0

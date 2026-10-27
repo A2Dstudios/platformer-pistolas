@@ -39,14 +39,9 @@ public class zombieMob : MobBase
         _rb.linearVelocityX = direction * _velocity;
     }
 
-    public override void Attack()
-{
-    bool haPegado = AttackOnContact();
-
-    if (haPegado)
     protected override void Attack()
     {
-        Debug.Log("¡El zombie ha pegado al jugador! Daño: " + _baseDamage);
+        AttackOnContact();
     }
 }
-}
+

@@ -17,8 +17,6 @@ public class EnemyProjectile : MonoBehaviour
         transform.right = direction;
         _rb.linearVelocity = direction * speed;
 
-        _initialized = true;
-
         Destroy(gameObject, _lifetime);
     }
 
