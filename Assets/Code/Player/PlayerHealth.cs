@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,18 +12,26 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         _hP = _maxHP;
-        _shield = GetComponentInChildren<PlayerShield>();
+        _shield = GetComponent<PlayerShield>();
     }
 
     public void TakeDamage(float quantity)
     {
-        if (quantity <= 0) return;
-        if (_shield != null && _shield.HasShield()) return;
+        if (quantity <= 0f)
+        {
+            return;
+        }
+
+        if (_shield != null && _shield.HasShield())
+        {
+            return;
+        }
 
         _hP -= quantity;
+
         Debug.Log($"Vida del jugador: {_hP}/{_maxHP}");
 
-        if (_hP <= 0)
+        if (_hP <= 0f)
         {
             Die();
         }
@@ -30,7 +39,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
     }
 }

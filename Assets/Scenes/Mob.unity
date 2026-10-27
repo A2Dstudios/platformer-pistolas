@@ -836,6 +836,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 715291616617065341, guid: 4247ebb7011bcbc45a7a93a512b1b464, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1813810473}
     - target: {fileID: 2128012048905504933, guid: 4247ebb7011bcbc45a7a93a512b1b464, type: 3}
       propertyPath: _maxHP
       value: 1
@@ -1351,6 +1355,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1813810473}
+    - target: {fileID: 3688594059175421651, guid: 4247ebb7011bcbc45a7a93a512b1b464, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6281235764535132332, guid: 4247ebb7011bcbc45a7a93a512b1b464, type: 3}
       propertyPath: m_Name
       value: Zombie

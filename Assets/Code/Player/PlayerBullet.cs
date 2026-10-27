@@ -24,16 +24,24 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        ExplosiveBarrel barrel = other.GetComponentInParent<ExplosiveBarrel>();
+        if (barrel != null)
+        {
+            barrel.Explode();
+            Consume();
+            return;
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             if (!other.TryGetComponent(out MobBase enemy)) return;
             enemy.TakeDamage(_damage);
         }
-        
-        if(((1 << other.gameObject.layer) & _obstacleLayers) != 0) //si la capa de other es una de las de obstaculo
+
+        if (((1 << other.gameObject.layer) & _obstacleLayers) != 0) // si la capa de other es una de las de obstaculo
         {
-            GameObject impact = Instantiate(_impactEffect, transform.position, transform.rotation); 
-            Destroy(impact, 1f); 
+            GameObject impact = Instantiate(_impactEffect, transform.position, transform.rotation);
+            Destroy(impact, 1f);
 
             Consume();
         }
@@ -41,7 +49,6 @@ public class PlayerBullet : MonoBehaviour
 
     public virtual void Consume()
     {
-
         Destroy(gameObject);
     }
 }
