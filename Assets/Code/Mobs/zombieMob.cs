@@ -6,6 +6,12 @@ public class zombieMob : MobBase
     [Header("Zombie")]
     [SerializeField] private float _detectionRange = 6f;
     [SerializeField] private float _stopDistance = 1.2f;
+    [SerializeField] private SpriteRenderer _sprite;
+
+    private void Update()
+    {
+        _sprite.flipX = _player.position.x > transform.position.x;
+    }
 
     private void FixedUpdate()
     {

@@ -214,15 +214,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::zombieMob
   _maxHP: 10
-  _velocity: 1
+  _velocity: 2.5
   _baseDamage: 1
   _points: 0
   _hitEffect: {fileID: 6114803555383978274}
   _deathEffect: {fileID: 2615369458876785881, guid: 83322ff72196ecd49a4558e7e985d7c1, type: 3}
   _attackRange: 1.2
   _attackCooldown: 1
-  _detectionRange: 6
-  _stopDistance: 1.5
+  _detectionRange: 15
+  _stopDistance: 0
+  _sprite: {fileID: 5896275472704955010}
 --- !u!95 &7936368497645054009
 Animator:
   serializedVersion: 7
