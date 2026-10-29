@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class wizardMob : MobBase
 {
+    [Header("Wizard")]
     [SerializeField] private float _minTpTime = 1f;
     [SerializeField] private float _maxTpTime = 5f;
     [SerializeField] private float _minTpDistance = 3f;

@@ -4955,7 +4955,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -5027,8 +5027,8 @@ MonoBehaviour:
   _attackCooldown: 1
   _minTpTime: 1
   _maxTpTime: 5
-  _minTpDistance: 5
-  _maxTpDistance: 5
+  _minTpDistance: 2
+  _maxTpDistance: 8
   _minAttackCooldown: 0.8
   _maxAttackCooldown: 2.4
   _projectileSpeed: 6
