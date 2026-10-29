@@ -8,6 +8,8 @@ public class batMob : MobBase
     [SerializeField] private float _stopDistance = 1.2f;
     [SerializeField] private float _patrolDistance = 3f;
 
+    [SerializeField] private SpriteRenderer _sprite;
+
     private Vector2 _startPosition;
     private int _patrolDirection = 1;
 
@@ -16,6 +18,11 @@ public class batMob : MobBase
         base.Awake();
 
         _startPosition = transform.position;
+    }
+
+    private void Update()
+    {
+        _sprite.flipX = _player.position.x < transform.position.x;
     }
 
     private void FixedUpdate()

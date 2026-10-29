@@ -236,6 +236,7 @@ MonoBehaviour:
   _detectionRange: 6
   _stopDistance: 1.5
   _patrolDistance: 3
+  _sprite: {fileID: 1331675361688501562}
 --- !u!1 &6775632342780621396
 GameObject:
   m_ObjectHideFlags: 0
