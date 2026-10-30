@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class PlayerShooting : MonoBehaviour
         _inputs = new PlayerInputs();
 
         ChanseShootingType(_shootingType);
+        OnNewItem?.Invoke(null);
     }
     private void OnEnable()
     {
@@ -109,6 +111,8 @@ public class PlayerShooting : MonoBehaviour
 
         Rigidbody2D rb = bomb.GetComponent<Rigidbody2D>();
         rb.linearVelocity = _bombThrowSpeed * dir.normalized + _rb.linearVelocity*0.5f;
+        OnNewItem?.Invoke(null);
+
     }
 
     private GameObject GetBombPrefab(BombType type) // pillar bomba asignada a ese tipo
@@ -133,6 +137,8 @@ public class PlayerShooting : MonoBehaviour
         _gunTransform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
+    public event Action<Sprite> OnNewItem;
+
 
     public bool TryPickupBomb(BombType type)
     {
@@ -140,6 +146,8 @@ public class PlayerShooting : MonoBehaviour
 
         _hasBomb = true;
         _equippedBomb = type;
+        OnNewItem?.Invoke(GetBombPrefab(_equippedBomb).GetComponentInChildren<SpriteRenderer>().sprite);
+
         return true;
     }
 

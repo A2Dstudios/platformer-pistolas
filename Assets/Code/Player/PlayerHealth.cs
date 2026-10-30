@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public event Action<float, float> OnHealthChanged;
 
     private float _hP;
+    private bool _isInvulnerable;
     private PlayerShield _shield;
 
     private void Awake()
@@ -24,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float quantity)
     {
-        Debug.Log("Daño recibido: " + quantity + " | vida antes: " + _hP);
+        if (_isInvulnerable) return;
         if (_shield != null && _shield.HasShield()) return;
 
         _hP -= quantity;
@@ -33,6 +35,16 @@ public class PlayerHealth : MonoBehaviour
         if (_hP <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            return;
         }
+
+        StartCoroutine(Invulnerable());
+    }
+
+    private IEnumerator Invulnerable()
+    {
+        _isInvulnerable = true;
+        yield return new WaitForSeconds(1f);
+        _isInvulnerable = false;
     }
 }
