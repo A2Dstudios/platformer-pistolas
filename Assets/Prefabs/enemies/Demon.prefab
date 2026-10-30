@@ -4947,7 +4947,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5005,11 +5005,11 @@ MonoBehaviour:
   _preferedDistance: 5
   _minAttackCooldown: 1.2
   _maxAttackCooldown: 3
-  _projectileSpeed: 6
+  _projectileSpeed: 9
   _groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  _projectilePrefab: {fileID: 6433527368585582329, guid: 5b35d5de47d0f0f40b38a4c8a777f89a, type: 3}
+  _projectilePrefab: {fileID: 6433527368585582329, guid: d74f9d08634cccc42a730d2184c181c8, type: 3}
   _firePoint: {fileID: 7037973558088247736}
   _animator: {fileID: 620085810710299645}
 --- !u!58 &5845896013899244670

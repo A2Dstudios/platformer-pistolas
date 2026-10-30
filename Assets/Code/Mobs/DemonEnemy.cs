@@ -10,6 +10,7 @@ public class DemonEnemy : MobBase
     [SerializeField] private float _maxAttackCooldown = 3f;
     [SerializeField] private float _projectileSpeed = 6f;
 
+
     [Header("Refs")]
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private GameObject _projectilePrefab;
@@ -38,6 +39,8 @@ public class DemonEnemy : MobBase
             _nextAttackTime = Time.time + Random.Range(_minAttackCooldown, _maxAttackCooldown);
         }
 
+
+        // girar
         int flip = _player.position.x > transform.position.x ? -1 : 1;
         transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * flip, transform.localScale.y, transform.localScale.z);
 
@@ -52,10 +55,11 @@ public class DemonEnemy : MobBase
     {
         Vector2 dirFromPlayer = ((Vector2)transform.position - (Vector2)_player.position).normalized;
 
-        Vector2 bias = Vector2.up * 0.5f;
-        dirFromPlayer = (dirFromPlayer + bias).normalized;
+        // offset hacia arriba si el demonio esta por debajo del player
+        Vector2 offset = _player.position.y > transform.position.y ? Vector2.up * 0.5f : Vector2.zero;
+        dirFromPlayer = (dirFromPlayer + offset).normalized;
 
-        Vector2 targetPos = (Vector2)_player.position + (dirFromPlayer * _preferedDistance);
+        Vector2 targetPos = (Vector2)_player.position + (dirFromPlayer * GetTargetDistance());
         Vector2 displacementToTarget = targetPos - (Vector2)transform.position;
 
         Vector2 direction = displacementToTarget.normalized;
@@ -64,6 +68,15 @@ public class DemonEnemy : MobBase
         Vector2 newVel = Vector2.MoveTowards(curVel, targetVel, _acceleration * Time.fixedDeltaTime);
 
         _rb.linearVelocity = newVel;
+    }
+
+    // ir variando la distancia alante y atras para que el movimiento parezca mas natural
+    private float GetTargetDistance()
+    {
+        float amplitude = _preferedDistance * 0.15f;
+        float frequency = Mathf.PI * 2f / 6f;
+
+        return _preferedDistance + Mathf.Sin(Time.time * frequency) * amplitude;
     }
 
     protected override void Attack()
