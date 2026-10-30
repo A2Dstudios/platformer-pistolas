@@ -5,6 +5,7 @@ public class PlayerShield : MonoBehaviour
 {
 
     [SerializeField] private float _duration = 5f;
+    [SerializeField] private GameObject _shieldVisual;
 
     private bool _hasShield;
     private float _shieldEndTime;
@@ -18,6 +19,11 @@ public class PlayerShield : MonoBehaviour
     {
         _hasShield = true;
         _shieldEndTime = Time.time + _duration;
+
+        if (_shieldVisual != null)
+        {
+            _shieldVisual.SetActive(true);
+        }
     }
 
     private void Update()
@@ -25,6 +31,11 @@ public class PlayerShield : MonoBehaviour
         if (_hasShield && Time.time >= _shieldEndTime)
         {
             _hasShield = false;
+
+            if (_shieldVisual != null)
+            {
+                _shieldVisual.SetActive(false);
+            }
         }
     }
 }
