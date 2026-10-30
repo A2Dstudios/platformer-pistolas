@@ -73,8 +73,8 @@ public class DemonEnemy : MobBase
     // ir variando la distancia alante y atras para que el movimiento parezca mas natural
     private float GetTargetDistance()
     {
-        float amplitude = _preferedDistance * 0.15f;
-        float frequency = Mathf.PI * 2f / 6f;
+        float amplitude = _preferedDistance * 0.5f;
+        float frequency = Mathf.PI * 2f / 12f;
 
         return _preferedDistance + Mathf.Sin(Time.time * frequency) * amplitude;
     }
