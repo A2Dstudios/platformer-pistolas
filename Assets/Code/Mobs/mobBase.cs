@@ -29,26 +29,11 @@ public abstract class MobBase : MonoBehaviour
     {
         _hP = _maxHP;
         _rb = GetComponent<Rigidbody2D>();
-
-        GameObject playerObject =
-            GameObject.FindGameObjectWithTag("Player");
-
-        if (playerObject != null)
-        {
-            SetPlayer(playerObject.transform);
-        }
-        else
-        {
-            Debug.LogWarning(
-                "No se encuentra ningún objeto con la tag Player.",
-                this
-            );
-        }
     }
 
-    public void SetPlayer(Transform player)
+    private void Start()
     {
-        _player = player;
+        _player = PlayerReference.Player;
     }
 
     public void TakeDamage(float quantity)

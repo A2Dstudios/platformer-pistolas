@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 8045302297848338543}
   - component: {fileID: 4540887517974298870}
   - component: {fileID: 4224206286342640584}
+  - component: {fileID: 7985306964338703651}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -423,6 +424,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShield
   _duration: 5
   _shieldVisual: {fileID: 7522590685303138873}
+--- !u!114 &7985306964338703651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6770084599704220104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23df8cdbbde49d4abff3c6d362b4148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &7522590685303138873
 GameObject:
   m_ObjectHideFlags: 0

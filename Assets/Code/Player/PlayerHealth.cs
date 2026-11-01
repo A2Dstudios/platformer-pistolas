@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public event Action<float, float> OnHealthChanged;
 
     private float _hP;
+    private bool _isDead;
     private bool _isInvulnerable;
     private PlayerShield _shield;
 
@@ -26,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float quantity)
     {
-        if (_isInvulnerable) return;
+        if (_isInvulnerable || _isDead) return;
         if (_shield != null && _shield.HasShield()) return;
 
         _hP -= quantity;
@@ -34,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (_hP <= 0)
         {
+            _isDead = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             return;
         }
